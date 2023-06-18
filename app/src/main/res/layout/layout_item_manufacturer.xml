@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="3dp"
+    android:layout_marginBottom="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:elevation="@dimen/_5sdp">
+
+    <TextView
+        android:id="@+id/tv_name_manufacturer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apple"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:layout_gravity="center"/>
+
+</androidx.cardview.widget.CardView>

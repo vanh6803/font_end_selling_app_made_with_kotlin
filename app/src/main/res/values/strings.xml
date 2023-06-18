@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SellingAppKotlin</string>
+    <string name="app_name">Selling App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_username_or_email">Enter your username or email</string>
@@ -25,4 +25,8 @@
     <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="enter_name_product">enter name product ...</string>
     <string name="hello_name_user">Hello Vanh Hụt Hoa !</string>
+    <string name="create_account_successfully">create account successfully</string>
+    <string name="press_back_one_more_time_to_exit">Press back one more time to exit</string>
+    <string name="title_sale">Biaya Sepatu Rebook\n dengan discount 15%</string>
+    <string name="buy_now">Buy Now</string>
 </resources>

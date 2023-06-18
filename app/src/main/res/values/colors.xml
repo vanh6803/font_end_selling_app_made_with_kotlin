@@ -13,4 +13,5 @@
     <color name="red">#FF0000</color>
     <color name="color_hint">#919191</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="done">#21cb88</color>
 </resources>
