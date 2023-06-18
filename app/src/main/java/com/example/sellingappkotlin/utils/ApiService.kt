@@ -17,7 +17,7 @@ interface ApiService {
     fun getListProduct(): Call<ApiResponseProduct>
 
     companion object {
-        var baseUrl = Config.URL
+        var baseUrl = "${Config.URL}/api/"
         fun create(): ApiService {
             val retrofit =
                 Retrofit.Builder()

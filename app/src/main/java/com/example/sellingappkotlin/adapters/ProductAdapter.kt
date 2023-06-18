@@ -9,7 +9,10 @@ import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.LayoutItemProductBinding
 import com.example.sellingappkotlin.models.Product
+import com.example.sellingappkotlin.utils.Config
 import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewHolder>() {
 
@@ -37,12 +40,12 @@ class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewH
 
     class ProductViewHolder(val binding: LayoutItemProductBinding) : ViewHolder(binding.root) {
         fun bindView(product: Product) {
-            Glide.with(binding.root).load(product.image).error(R.drawable.baseline_image_24)
+            Glide.with(binding.root).load(product.image.replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
                 .into(binding.imgProduct)
             binding.tvNameProduct.text = product.name
-            val format = DecimalFormat("###,###,###")
-            val formatPrice = format.format("${product.price} đ")
-            binding.tvPriceProduct.text = formatPrice
+            val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+            val formattedPrice = numberFormat.format(product.price)
+            binding.tvPriceProduct.text = "$formattedPrice đ"
         }
     }
 

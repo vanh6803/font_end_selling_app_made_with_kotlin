@@ -115,6 +115,7 @@ class HomeFragment : Fragment() {
                 ) {
                     val apiResponseProduct = response.body()
                     listProduct = apiResponseProduct!!.data
+                    Log.d("data from api", "${listProduct.size}")
                     productAdapter = ProductAdapter(requireContext())
                     productAdapter.setData(listProduct)
                     binding.rcvProducts.adapter = productAdapter

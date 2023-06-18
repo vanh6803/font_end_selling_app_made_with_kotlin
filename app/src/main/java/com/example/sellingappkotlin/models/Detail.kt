@@ -2,7 +2,7 @@ package com.example.sellingappkotlin.models
 
 class Detail(
     var screenTechnology: String,
-    var screenSize: Int,
+    var screenSize: String,
     var screenFeatures: String,
     var screenType: String,
     var rearCamera: String,
