@@ -1,14 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".components.fragments.PersonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:elevation="10dp"
+        android:src="@drawable/avatar"
+        app:civ_border_color="@color/gray69"
+        app:civ_border_width="1dp" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/default_emai"
+        android:textSize="@dimen/h8" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@drawable/custom_edittext">
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:layout_weight="1"
+            android:src="@drawable/dark_mode"
+            android:layout_marginHorizontal="@dimen/_10sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/switch_to_dark_mode"
+            android:textColor="@color/black"
+            android:fontFamily="@font/acme"
+            android:textSize="@dimen/h6" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@drawable/custom_edittext">
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_edit_profile" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/edit_profile"
+            android:textColor="@color/black"
+            android:fontFamily="@font/acme"
+            android:textSize="@dimen/h6"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_detail_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@drawable/custom_edittext">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_account_circle_24" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/detail_profile"
+            android:textColor="@color/black"
+            android:fontFamily="@font/acme"
+            android:textSize="@dimen/h6"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@drawable/custom_edittext">
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_change_password" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/change_password"
+            android:textColor="@color/black"
+            android:fontFamily="@font/acme"
+            android:textSize="@dimen/h6"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_my_oder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:background="@drawable/custom_edittext">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_bookmark_border_24" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/my_oder"
+            android:textColor="@color/black"
+            android:fontFamily="@font/acme"
+            android:textSize="@dimen/h6"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:background="@drawable/custom_edittext"
+        android:fontFamily="@font/acme"
+        android:text="@string/log_out"
+        android:textAllCaps="false"
+        android:textSize="@dimen/h6" />
+
+</LinearLayout>

@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_product"
@@ -29,8 +30,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Iphone 14 pro max"
-            android:textSize="14sp" />
+            android:text="@string/name_product"
+            android:textSize="@dimen/h8" />
 
         <TextView
             android:id="@+id/tv_price_product"
@@ -38,9 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_medium"
-            android:text="26.690.000 đ"
-            android:textColor="#FF1100"
-            android:textSize="14sp" />
+            android:text="@string/price_prodcut"
+            android:textColor="@color/red"
+            android:textSize="@dimen/h8" />
 
     </LinearLayout>
 

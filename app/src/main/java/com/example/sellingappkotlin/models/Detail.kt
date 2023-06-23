@@ -7,7 +7,7 @@ class Detail(
     var screenType: String,
     var rearCamera: String,
     var frontCamera: String,
-    var chipset: String,
+    var chipSet: String,
     var cpu: String,
     var gpu: String,
     var ram: Int,

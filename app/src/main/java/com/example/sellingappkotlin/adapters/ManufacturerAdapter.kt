@@ -1,58 +1,49 @@
 package com.example.sellingappkotlin.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
-import com.example.sellingappkotlin.R
-import com.example.sellingappkotlin.databinding.LayoutItemProductBinding
-import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.utils.Config
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.Locale
+import com.example.sellingappkotlin.components.activities.ProductAsManufactureActivity
+import com.example.sellingappkotlin.databinding.LayoutItemManufacturerBinding
+import com.example.sellingappkotlin.models.Manufacturer
 
-class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewHolder>() {
 
-    private var list = mutableListOf<Product>()
+class ManufacturerAdapter(var context: Context) : Adapter<ManufacturerAdapter.ManufacturerViewHolder>() {
 
-    fun setData(list: MutableList<Product>) {
+    private var list = mutableListOf<Manufacturer>()
+
+    fun setData(list: MutableList<Manufacturer>) {
         this.list = list
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManufacturerViewHolder {
         val view =
-            LayoutItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(view)
+            LayoutItemManufacturerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ManufacturerViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val obj: Product = list[position]
+    override fun onBindViewHolder(holder: ManufacturerViewHolder, position: Int) {
+        val obj: Manufacturer = list[position]
         holder.bindView(obj)
+        holder.binding.layoutItemManufacture.setOnClickListener {
+            val intent = Intent(context, ProductAsManufactureActivity::class.java)
+            intent.putExtra("name", obj.name)
+            intent.putExtra("logo", obj.logo)
+            context.startActivity(intent)
+        }
     }
 
-    class ProductViewHolder(val binding: LayoutItemProductBinding) : ViewHolder(binding.root) {
-        fun bindView(product: Product) {
-            Glide.with(binding.root).load(product.image.replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
-                .into(binding.imgProduct)
-            binding.tvNameProduct.maxLines = 1
-            // Check if the product name is too long
-            if (product.name.length > 20) {
-                val shortenedName = product.name.substring(0, 20) + "..."
-                binding.tvNameProduct.text = shortenedName
-            } else {
-                binding.tvNameProduct.text = product.name
-            }
-            val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
-            val formattedPrice = numberFormat.format(product.price)
-            binding.tvPriceProduct.text = "$formattedPrice đ"
+    class ManufacturerViewHolder(val binding: LayoutItemManufacturerBinding) : ViewHolder(binding.root) {
+        fun bindView(manufacturer: Manufacturer) {
+            binding.tvNameManufacturer.text = manufacturer.name
         }
     }
 
