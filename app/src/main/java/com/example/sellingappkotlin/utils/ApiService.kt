@@ -9,6 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.QueryName
 
 interface ApiService {
     // todo: get manufacturer
@@ -18,6 +20,10 @@ interface ApiService {
     // todo: get product
     @GET("product")
     fun getListProduct(): Call<ApiResponseProduct>
+
+    // todo: get product
+    @GET("product")
+    fun getListProductFormManufacturers(@Query("manufacturer") manufacturer: String): Call<ApiResponseProduct>
 
     @GET("product/detail/{id}")
     fun getProductFromId(@Path("id") id: String): Call<ApiResponseProductDetail>

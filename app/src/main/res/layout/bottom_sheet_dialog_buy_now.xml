@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img"
+            android:layout_width="@dimen/_100dp"
+            android:layout_height="@dimen/_100dp"
+            app:srcCompat="@drawable/image_test" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_product"
+                android:textSize="@dimen/h7"
+                android:fontFamily="@font/acme"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_prodcut"
+                android:textSize="@dimen/h7"
+                android:textColor="@color/red"
+                android:fontFamily="@font/poppins_medium"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="total: 200"
+                android:textSize="@dimen/h7" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/gray69"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/color"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/acme"
+        android:textSize="@dimen/h6"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        tools:listitem="@layout/layout_item_color"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/gray69"
+        android:layout_marginVertical="@dimen/_10sdp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lượng"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <Button
+                android:id="@+id/btn_minus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="-"
+                android:gravity="center"
+                android:focusable="false"
+                android:background="@drawable/customize_button_select_number"
+                />
+            <EditText
+                android:id="@+id/ed_quantity"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="14sp"
+                android:textColor="#FF5722"
+                android:layout_gravity="center"
+                android:background="@drawable/customize_button_select_number"
+                android:inputType="number"
+                />
+
+            <Button
+                android:id="@+id/btn_plus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="+"
+                android:gravity="center"
+                android:background="@drawable/customize_button_select_number"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/gray69"
+        android:layout_marginVertical="@dimen/_10sdp"/>
+
+    <Button
+        android:id="@+id/btn_buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buy_now"
+        android:textColor="@color/white"
+        android:background="@drawable/button_border"
+        android:layout_margin="10dp"/>
+
+
+</LinearLayout>

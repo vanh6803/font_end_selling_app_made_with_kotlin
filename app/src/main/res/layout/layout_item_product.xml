@@ -19,29 +19,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:maxHeight="358dp"
             android:src="@drawable/image_test"
 
             />
 
-        <TextView
-            android:id="@+id/tv_name_product"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/name_product"
-            android:textSize="@dimen/h8" />
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+            <TextView
+                android:id="@+id/tv_name_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/name_product"
+                android:textSize="@dimen/h8" />
 
-        <TextView
-            android:id="@+id/tv_price_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/price_prodcut"
-            android:textColor="@color/red"
-            android:textSize="@dimen/h8" />
+            <TextView
+                android:id="@+id/tv_price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/price_prodcut"
+                android:textColor="@color/red"
+                android:textSize="@dimen/h8" />
+        </LinearLayout>
 
     </LinearLayout>
 

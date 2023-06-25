@@ -50,7 +50,7 @@ class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewH
 
     class ProductViewHolder(val binding: LayoutItemProductBinding) : ViewHolder(binding.root) {
         fun bindView(product: Product) {
-            Glide.with(binding.root).load(product.image.replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
+            Glide.with(binding.root).load(product.image[0].replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
                 .into(binding.imgProduct)
             binding.tvNameProduct.maxLines = 1
             // Check if the product name is too long

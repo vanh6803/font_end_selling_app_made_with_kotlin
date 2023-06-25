@@ -2,6 +2,7 @@ package com.example.sellingappkotlin.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -37,6 +38,8 @@ class ManufacturerAdapter(var context: Context) : Adapter<ManufacturerAdapter.Ma
             val intent = Intent(context, ProductAsManufactureActivity::class.java)
             intent.putExtra("name", obj.name)
             intent.putExtra("logo", obj.logo)
+            intent.putExtra("id",obj._id)
+            Log.d("id", obj._id)
             context.startActivity(intent)
         }
     }

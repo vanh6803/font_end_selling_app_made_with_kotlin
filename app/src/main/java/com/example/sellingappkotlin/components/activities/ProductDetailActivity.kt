@@ -9,12 +9,16 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
+import com.example.sellingappkotlin.adapters.ColorSelectedAdapter
+import com.example.sellingappkotlin.adapters.SlideShowAdapter
 import com.example.sellingappkotlin.databinding.ActivityProductDetailBinding
+import com.example.sellingappkotlin.databinding.BottomSheetDialogBuyNowBinding
 import com.example.sellingappkotlin.databinding.DialogShowMoreProductBinding
 import com.example.sellingappkotlin.models.ApiResponseProductDetail
 import com.example.sellingappkotlin.models.Product
 import com.example.sellingappkotlin.utils.ApiService
 import com.example.sellingappkotlin.utils.Config
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +28,8 @@ import java.util.Locale
 class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private var product: Product? = null
+    private lateinit var slideShowAdapter: SlideShowAdapter
+    private lateinit var colorSelectedAdapter: ColorSelectedAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
@@ -68,29 +74,35 @@ class ProductDetailActivity : AppCompatActivity() {
         val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
         val formattedPrice = numberFormat.format(product?.price)
         binding.tvPriceProduct.text = "$formattedPrice đ"
-        Glide.with(binding.root).load(
-            product?.image?.replace(
-                "localhost",
-                Config.LOCALHOST
-            )
-        ).error(R.drawable.baseline_image_24)
-            .into(binding.imgProduct)
-        binding.tvManufacturerProduct.text = product?.manufacturer?.name
+
+        var index = 1
+        slideShowAdapter = SlideShowAdapter(this)
+        product?.image?.let { slideShowAdapter.setData(it) }
+        binding.viewpager2.adapter = slideShowAdapter
+        binding.circleIndicator.setViewPager(binding.viewpager2)
+        "${index} \\ ${product?.image?.size} ".also { binding.tvCounter.text = it }
+
+        binding.tvManufacturerProduct.text = ": ${product?.manufacturer?.name}"
+        binding.tvQuantityProduct.text = "${product?.quantity}"
         binding.tableName.text = product?.name
         binding.tableChipset.text = product?.detail?.chipSet
         binding.tableCpu.text = product?.detail?.cpu
         binding.tableGpu.text = product?.detail?.gpu
-        binding.tvRam.text = "${product?.detail?.ram}"
-        binding.tvRom.text = "${product?.detail?.rom}"
-        binding.btnShowMore.setOnClickListener {
-
-        }
+        binding.tvRam.text = "${product?.detail?.ram} GB"
+        binding.tvRom.text = "${product?.detail?.rom} GB"
         binding.tvDescription.text = product?.description
 
         binding.btnShowMore.setOnClickListener {
             showDialog()
         }
+
+        binding.btnBuyNow.setOnClickListener {
+            showBottomDialog()
+        }
+
+        binding.btnAddToCart.setOnClickListener {}
     }
+
 
     private fun showDialog() {
         val binding: DialogShowMoreProductBinding = DialogShowMoreProductBinding.inflate(
@@ -102,22 +114,23 @@ class ProductDetailActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(R.color.transparent)
         dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
 
-        binding.tvRam.text = "${product?.detail?.ram}"
-        binding.tvRom.text = "${product?.detail?.rom}"
+        binding.tvRam.text = "${product?.detail?.ram} GB"
+        binding.tvRom.text = "${product?.detail?.rom} Gb"
 
         binding.tvCpu.text = product?.detail?.cpu
         binding.tvGpu.text = product?.detail?.gpu
         binding.tvChipset.text = product?.detail?.chipSet
 
-        binding.tvScreenSize.text = product?.detail?.screenSize
+        binding.tvScreenSize.text = "${product?.detail?.screenSize} inch"
         binding.tvScreenTechnology.text = product?.detail?.screenTechnology
-        binding.tvScreenFeatures.text = product?.detail?.screenTechnology
+        binding.tvScreenFeatures.text = product?.detail?.screenFeatures
         binding.tvScreenType.text = product?.detail?.screenType
 
         binding.tvFontCamera.text = product?.detail?.frontCamera
         binding.tvRearCamera.text = product?.detail?.rearCamera
 
-        binding.tvBattery.text = "${product?.detail?.battery}"
+        binding.tvStatus.text = product?.status
+        binding.tvBattery.text = "${product?.detail?.battery} mAh"
         binding.tvOperatingSystem.text = product?.detail?.operatingSystem
         binding.tvInternet.text = product?.detail?.internet
         binding.tvWeight.text = "${product?.detail?.weight}"
@@ -134,6 +147,27 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+
+    private fun showBottomDialog() {
+        val binding: BottomSheetDialogBuyNowBinding =
+            BottomSheetDialogBuyNowBinding.inflate(LayoutInflater.from(this))
+        var bottomDialog = BottomSheetDialog(this)
+        bottomDialog.setContentView(binding.root)
+        bottomDialog.window?.setBackgroundDrawableResource(R.color.transparent)
+
+        binding.tvName.text = product?.name
+        Glide.with(this)
+            .load(product!!.image[0].replace("localhost", Config.LOCALHOST))
+            .error(R.drawable.baseline_image_24)
+            .into(binding.img)
+
+//        colorSelectedAdapter = ColorSelectedAdapter(this)
+//        product?.color?.let { colorSelectedAdapter.setData(it) }
+//        binding.rcvColor.adapter = colorSelectedAdapter
+
+        bottomDialog.show()
     }
 
 }
