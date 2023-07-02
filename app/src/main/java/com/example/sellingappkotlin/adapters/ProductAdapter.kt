@@ -2,7 +2,6 @@ package com.example.sellingappkotlin.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
-import com.example.sellingappkotlin.components.activities.ProductDetailActivity
+import com.example.sellingappkotlin.components.activities.product.ProductDetailActivity
 import com.example.sellingappkotlin.databinding.LayoutItemProductBinding
 import com.example.sellingappkotlin.models.Product
 import com.example.sellingappkotlin.utils.Config
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -50,7 +48,7 @@ class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewH
 
     class ProductViewHolder(val binding: LayoutItemProductBinding) : ViewHolder(binding.root) {
         fun bindView(product: Product) {
-            Glide.with(binding.root).load(product.image[0].replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
+            Glide.with(binding.root).load(product.image[0].url.replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
                 .into(binding.imgProduct)
             binding.tvNameProduct.maxLines = 1
             // Check if the product name is too long

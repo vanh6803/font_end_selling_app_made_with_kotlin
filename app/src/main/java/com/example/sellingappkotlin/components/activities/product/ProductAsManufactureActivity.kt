@@ -1,4 +1,4 @@
-package com.example.sellingappkotlin.components.activities
+package com.example.sellingappkotlin.components.activities.product
 
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +16,6 @@ import com.example.sellingappkotlin.utils.Config
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Query
 
 class ProductAsManufactureActivity : AppCompatActivity() {
 
@@ -42,8 +41,8 @@ class ProductAsManufactureActivity : AppCompatActivity() {
         Glide.with(binding.root).load(logo?.replace("localhost", Config.LOCALHOST )).error(R.drawable.baseline_image_24)
             .into(binding.logo)
 
-        callApi(id!!)
-
+        callApi(id)
+        initRefresh(id)
     }
 
     fun callApi(id: String){
@@ -71,6 +70,13 @@ class ProductAsManufactureActivity : AppCompatActivity() {
                 }
 
             })
+    }
+
+    private fun initRefresh(id: String){
+        binding.swipeRefresh.setOnRefreshListener {
+            callApi(id)
+            binding.swipeRefresh.isRefreshing = false
+        }
     }
 
 }

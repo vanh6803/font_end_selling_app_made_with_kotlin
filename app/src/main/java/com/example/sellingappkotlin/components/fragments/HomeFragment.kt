@@ -17,7 +17,8 @@ import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.HotProductAdapter
 import com.example.sellingappkotlin.adapters.ManufacturerAdapter
 import com.example.sellingappkotlin.adapters.ProductAdapter
-import com.example.sellingappkotlin.components.activities.SearchActivity
+import com.example.sellingappkotlin.components.activities.product.SearchActivity
+import com.example.sellingappkotlin.components.activities.user.ProfileActivity
 import com.example.sellingappkotlin.databinding.FragmentHomeBinding
 import com.example.sellingappkotlin.models.ApiResponseManufacturer
 import com.example.sellingappkotlin.models.ApiResponseProduct
@@ -69,16 +70,23 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         slideImageHotProduct()
         showProducts()
         showManufactures()
         showActivitySearch()
+        initRefresh()
     }
-
 
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment().apply {}
+    }
+
+    private fun initView() {
+        binding.imgProfile.setOnClickListener{
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        }
     }
 
     private fun showListHotProducts(): MutableList<HotProduct> {
@@ -190,6 +198,16 @@ class HomeFragment : Fragment() {
     private fun nextActivitySearch() {
         val intent = Intent(requireContext(), SearchActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun initRefresh(){
+        binding.layoutRefresh.setOnRefreshListener {
+            slideImageHotProduct()
+            showProducts()
+            showManufactures()
+            showActivitySearch()
+            binding.layoutRefresh.isRefreshing = false
+        }
     }
 
     override fun onDestroy() {

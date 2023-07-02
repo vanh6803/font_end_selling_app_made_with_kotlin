@@ -1,4 +1,4 @@
-package com.example.sellingappkotlin.components.activities
+package com.example.sellingappkotlin.components.activities.product
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

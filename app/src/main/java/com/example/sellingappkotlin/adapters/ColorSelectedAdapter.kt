@@ -1,11 +1,11 @@
 package com.example.sellingappkotlin.adapters
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.LayoutItemColorBinding
@@ -14,26 +14,39 @@ import com.example.sellingappkotlin.models.ColorProduct
 class ColorSelectedAdapter(context: Context) :
     RecyclerView.Adapter<ColorSelectedAdapter.ColorViewHolder>() {
 
-    var list = mutableListOf<ColorProduct>()
-    var selected = ""
+    private var list = mutableListOf<ColorProduct>()
+    var itemSelected: String = ""
+    var onClickColorListener: ((nameColor:String) -> Unit)? = null
 
     fun setData(list: MutableList<ColorProduct>) {
         this.list = list
         notifyDataSetChanged()
     }
 
-    class ColorViewHolder(val binding: LayoutItemColorBinding) :
+    inner class ColorViewHolder(val binding: LayoutItemColorBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(color: ColorProduct) {
-            color.code.forEach {
-                binding.viewColor.setBackgroundColor(color.code.toColorInt())
-                binding.selected.setBackgroundColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.transparent
+            binding.tvNameColor.text = color.name
+//            Log.d("COLOR", color.name)
+
+            if (itemSelected == color.name) {
+                binding.selected.setCardBackgroundColor(
+                    ColorStateList.valueOf(
+                        Color.parseColor(
+                            color.code
+                        )
                     )
                 )
-                binding.view.visibility = View.VISIBLE
+                if (color.name.contains("Black")||color.name.contains("Purple")) {
+                    binding.tvNameColor.setTextColor(Color.WHITE)
+                } else {
+                    binding.tvNameColor.setTextColor(Color.BLACK)
+                }
+                Log.d("SELECTED", color.name)
+
+            } else {
+                binding.selected.setCardBackgroundColor(binding.root.context.getColor(R.color.white))
+                binding.tvNameColor.setTextColor(Color.BLACK)
             }
         }
     }
@@ -56,11 +69,11 @@ class ColorSelectedAdapter(context: Context) :
         val color = list[position]
         holder.bindView(color)
 
+
         holder.binding.selected.setOnClickListener {
-            if (selected == color.name) {
-                holder.binding.selected.setBackgroundResource(R.drawable.border_item_selected)
-                holder.binding.view.visibility = View.INVISIBLE
-            }
+            onClickColorListener?.invoke(list[position].name)
+            itemSelected = list[position].name
+            notifyDataSetChanged()
         }
 
     }

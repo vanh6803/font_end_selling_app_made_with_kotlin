@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sellingappkotlin.components.activities.LoginActivity
+import com.example.sellingappkotlin.components.activities.auth.LoginActivity
+import com.example.sellingappkotlin.components.activities.user.ProfileActivity
 import com.example.sellingappkotlin.databinding.FragmentPersonBinding
+import com.example.sellingappkotlin.models.Detail
 
 class PersonFragment : Fragment() {
 
@@ -31,11 +33,21 @@ class PersonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
+
+    }
+
+    private fun initView() {
         binding.btnLogOut.setOnClickListener {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
-
+        binding.btnDetailProfile.setOnClickListener{
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        }
+        binding.profileImage.setOnClickListener{
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        }
     }
 
     companion object {

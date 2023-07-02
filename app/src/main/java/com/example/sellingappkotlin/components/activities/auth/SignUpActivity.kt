@@ -1,4 +1,4 @@
-package com.example.sellingappkotlin.components.activities
+package com.example.sellingappkotlin.components.activities.auth
 
 import android.app.Dialog
 import android.content.Intent
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.ActivitySignUpBinding

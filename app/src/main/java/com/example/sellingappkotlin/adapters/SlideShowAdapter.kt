@@ -7,25 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.LayoutSlideShowProductBinding
+import com.example.sellingappkotlin.models.ImageProduct
 import com.example.sellingappkotlin.utils.Config
 
 class SlideShowAdapter(val context: Context) :
     RecyclerView.Adapter<SlideShowAdapter.SlideViewHolder>() {
     class SlideViewHolder(val binding: LayoutSlideShowProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindingView(url: String) {
-            url.forEach {
+        fun bindingView(image: ImageProduct) {
 //                Log.d("url", url)
-                Glide.with(binding.root.context).load(url.replace("localhost", Config.LOCALHOST)).error(R.drawable.baseline_image_24)
+                Glide.with(binding.root.context).load(image.url.replace("localhost", Config.LOCALHOST)).error(R.drawable.baseline_image_24)
                     .into(binding.imgSlideShow)
-            }
+
 
         }
     }
 
-    private var list = mutableListOf<String>()
+    private var list = mutableListOf<ImageProduct>()
 
-    fun setData(list: MutableList<String>) {
+    fun setData(list: MutableList<ImageProduct>) {
         this.list = list
         notifyDataSetChanged()
     }

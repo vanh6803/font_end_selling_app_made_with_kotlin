@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.sellingappkotlin.components.activities.ProductAsManufactureActivity
+import com.example.sellingappkotlin.components.activities.product.ProductAsManufactureActivity
 import com.example.sellingappkotlin.databinding.LayoutItemManufacturerBinding
 import com.example.sellingappkotlin.models.Manufacturer
 

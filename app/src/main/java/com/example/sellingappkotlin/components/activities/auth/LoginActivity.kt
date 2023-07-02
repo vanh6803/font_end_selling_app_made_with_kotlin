@@ -1,4 +1,4 @@
-package com.example.sellingappkotlin.components.activities
+package com.example.sellingappkotlin.components.activities.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import com.example.sellingappkotlin.R
+import com.example.sellingappkotlin.components.activities.MainActivity
 import com.example.sellingappkotlin.databinding.ActivityLoginBinding
 import kotlin.system.exitProcess
 

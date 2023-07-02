@@ -10,5 +10,5 @@ class Product(
     val quantity: Int,
     val status: String,
     val manufacturer: Manufacturer,
-    val image: MutableList<String>,
+    val image: MutableList<ImageProduct>,
 )

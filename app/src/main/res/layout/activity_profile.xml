@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".components.activities.product.SearchActivity">
+    tools:context=".components.activities.user.ProfileActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -37,21 +37,15 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/custom_edittext"
-        android:drawableEnd="@drawable/baseline_search_24"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:hint="@string/enter_name_product"
-        android:minHeight="48dp" />
-
-    <ListView
-        android:id="@+id/lv_suggestion"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:elevation="10dp"
+        android:src="@drawable/avatar"
+        app:civ_border_color="@color/gray69"
+        app:civ_border_width="1dp" />
 
 </LinearLayout>
