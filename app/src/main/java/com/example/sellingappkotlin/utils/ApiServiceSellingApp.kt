@@ -1,18 +1,16 @@
 package com.example.sellingappkotlin.utils
 
-import com.example.sellingappkotlin.models.ApiResponseManufacturer
-import com.example.sellingappkotlin.models.ApiResponseProduct
-import com.example.sellingappkotlin.models.ApiResponseProductDetail
-import com.example.sellingappkotlin.models.Product
+import com.example.sellingappkotlin.models.responseApi.ApiResponseManufacturer
+import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
+import com.example.sellingappkotlin.models.responseApi.ApiResponseProductDetail
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.QueryName
 
-interface ApiService {
+interface ApiServiceSellingApp {
     // todo: get manufacturer
     @GET("manufacturer")
     fun getListManufacturers(): Call<ApiResponseManufacturer>
@@ -30,13 +28,16 @@ interface ApiService {
 
     companion object {
         var baseUrl = "${Config.URL}/api/"
-        fun create(): ApiService {
-            val retrofit =
-                Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .build()
-            return retrofit.create(ApiService::class.java)
+        private val retrofit: Retrofit by lazy {
+            Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(baseUrl)
+                .build()
+        }
+
+        val apiServiceSellingApp: ApiServiceSellingApp by lazy {
+            retrofit.create(ApiServiceSellingApp::class.java)
+        }
+
         }
     }
-}

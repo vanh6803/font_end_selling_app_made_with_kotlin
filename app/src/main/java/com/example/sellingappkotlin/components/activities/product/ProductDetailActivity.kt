@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.ColorSelectedAdapter
 import com.example.sellingappkotlin.adapters.ImageSelectedAdapter
@@ -16,10 +16,10 @@ import com.example.sellingappkotlin.adapters.SlideShowAdapter
 import com.example.sellingappkotlin.databinding.ActivityProductDetailBinding
 import com.example.sellingappkotlin.databinding.BottomSheetDialogBuyNowBinding
 import com.example.sellingappkotlin.databinding.DialogShowMoreProductBinding
-import com.example.sellingappkotlin.models.ApiResponseProductDetail
+import com.example.sellingappkotlin.models.responseApi.ApiResponseProductDetail
 import com.example.sellingappkotlin.models.Product
 import com.example.sellingappkotlin.models.ProductToBill
-import com.example.sellingappkotlin.utils.ApiService
+import com.example.sellingappkotlin.utils.ApiServiceSellingApp
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,7 +51,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun callApi() {
         val id = intent.extras!!.getString("id")
-        ApiService.create().getProductFromId(id!!)
+        ApiServiceSellingApp.apiServiceSellingApp.getProductFromId(id!!)
             .enqueue(object : Callback<ApiResponseProductDetail> {
                 override fun onResponse(
                     call: Call<ApiResponseProductDetail>,
@@ -79,12 +79,12 @@ class ProductDetailActivity : AppCompatActivity() {
         val formattedPrice = numberFormat.format(product?.price)
         binding.tvPriceProduct.text = "$formattedPrice đ"
 
-        var index = 0
+        var index: Int
         slideShowAdapter = SlideShowAdapter(this)
         slideShowAdapter.setData(product?.image!!)
         binding.viewpager2.adapter = slideShowAdapter
         binding.circleIndicator.setViewPager(binding.viewpager2)
-        binding.viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewpager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -174,27 +174,26 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun showBottomDialog(value:String, OnclickListener: ()->Unit) {
         val binding: BottomSheetDialogBuyNowBinding =
             BottomSheetDialogBuyNowBinding.inflate(LayoutInflater.from(this))
-        var bottomDialog = BottomSheetDialog(this)
+        val bottomDialog = BottomSheetDialog(this)
         bottomDialog.setContentView(binding.root)
         bottomDialog.window?.setBackgroundDrawableResource(R.color.transparent)
 
         colorSelectedAdapter = ColorSelectedAdapter(this)
 
+        /*----------------------------------------------------------------*/
+        //todo: Select a color, and then select the image according to the selected color
         binding.tvName.text = product?.name
-//        imageSelectedAdapter = ImageSelectedAdapter(this)
-//        product?.image?.let { imageSelectedAdapter.setData(it) }
-//        colorSelectedAdapter.onClickColorListener = {selectedColor->
-////            val selectedImages = product?.image?.filter { it.nameColor == selectedColor }
-//            imageSelectedAdapter.updateImages(selectedColor)
-//        }
-//        binding.viewpagerImageSelected.adapter = imageSelectedAdapter
-//        binding.viewpagerImageSelected.isEnabled = false
+        imageSelectedAdapter = ImageSelectedAdapter(this)
+        product?.image?.let { imageSelectedAdapter.setData(it) }
+        binding.viewpagerImageSelected.adapter = imageSelectedAdapter
+        binding.viewpagerImageSelected.isEnabled = false
 
         binding.tvQuantity.text = "Total: ${product?.quantity}"
 
         product?.color?.let { colorSelectedAdapter.setData(it) }
         binding.rcvColor.adapter = colorSelectedAdapter
 
+        /*----------------------------------------------------------------*/
         var index = 1
 
         binding.btnPlus.setOnClickListener {

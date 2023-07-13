@@ -20,12 +20,12 @@ import com.example.sellingappkotlin.adapters.ProductAdapter
 import com.example.sellingappkotlin.components.activities.product.SearchActivity
 import com.example.sellingappkotlin.components.activities.user.ProfileActivity
 import com.example.sellingappkotlin.databinding.FragmentHomeBinding
-import com.example.sellingappkotlin.models.ApiResponseManufacturer
-import com.example.sellingappkotlin.models.ApiResponseProduct
+import com.example.sellingappkotlin.models.responseApi.ApiResponseManufacturer
+import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
 import com.example.sellingappkotlin.models.HotProduct
 import com.example.sellingappkotlin.models.Manufacturer
 import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.utils.ApiService
+import com.example.sellingappkotlin.utils.ApiServiceSellingApp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -128,12 +128,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun calApiRequestProducts() {
-        ApiService.create().getListProduct()
+        binding.layoutLoading.visibility = View.VISIBLE
+        ApiServiceSellingApp.apiServiceSellingApp.getListProduct()
             .enqueue(object : Callback<ApiResponseProduct> {
                 override fun onResponse(
                     call: Call<ApiResponseProduct>,
                     response: Response<ApiResponseProduct>
                 ) {
+                    binding.layoutLoading.visibility = View.GONE
                     val apiResponseProduct = response.body()
                     listProduct = apiResponseProduct!!.data
                     Log.d("data from api", "${listProduct.size}")
@@ -163,7 +165,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun callApiRequestManufactures() {
-        ApiService.create().getListManufacturers()
+        ApiServiceSellingApp.apiServiceSellingApp.getListManufacturers()
             .enqueue(object : Callback<ApiResponseManufacturer> {
                 override fun onResponse(
                     call: Call<ApiResponseManufacturer>,

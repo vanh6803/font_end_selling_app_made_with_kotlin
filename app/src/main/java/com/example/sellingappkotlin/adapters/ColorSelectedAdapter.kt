@@ -37,6 +37,7 @@ class ColorSelectedAdapter(context: Context) :
                         )
                     )
                 )
+                binding.selected.cardElevation = 10.0f
                 if (color.name.contains("Black")||color.name.contains("Purple")) {
                     binding.tvNameColor.setTextColor(Color.WHITE)
                 } else {
@@ -47,6 +48,7 @@ class ColorSelectedAdapter(context: Context) :
             } else {
                 binding.selected.setCardBackgroundColor(binding.root.context.getColor(R.color.white))
                 binding.tvNameColor.setTextColor(Color.BLACK)
+                binding.selected.cardElevation = 1.0f
             }
         }
     }

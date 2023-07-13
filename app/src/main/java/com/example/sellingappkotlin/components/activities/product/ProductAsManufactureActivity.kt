@@ -8,10 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.ProductAdapter
 import com.example.sellingappkotlin.databinding.ActivityProductAsManufactureBinding
-import com.example.sellingappkotlin.models.ApiResponseProduct
+import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
 import com.example.sellingappkotlin.models.Manufacturer
 import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.utils.ApiService
+import com.example.sellingappkotlin.utils.ApiServiceSellingApp
 import com.example.sellingappkotlin.utils.Config
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,7 +46,7 @@ class ProductAsManufactureActivity : AppCompatActivity() {
     }
 
     fun callApi(id: String){
-        ApiService.create().getListProductFormManufacturers(id)
+        ApiServiceSellingApp.apiServiceSellingApp.getListProductFormManufacturers(id)
             .enqueue(object : Callback<ApiResponseProduct> {
                 override fun onResponse(
                     call: Call<ApiResponseProduct>,

@@ -1,5 +1,6 @@
 package com.example.sellingappkotlin.components.activities.user
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+        binding.tvTitle.text = "My Profile"
     }
+
+
 }

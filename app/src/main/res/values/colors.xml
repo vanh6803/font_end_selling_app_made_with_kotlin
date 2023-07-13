@@ -14,4 +14,5 @@
     <color name="color_hint">#919191</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="done">#21cb88</color>
+    <color name="trans_black">#97000000</color>
 </resources>

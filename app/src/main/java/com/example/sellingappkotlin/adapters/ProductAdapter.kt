@@ -53,7 +53,7 @@ class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewH
             binding.tvNameProduct.maxLines = 1
             // Check if the product name is too long
             if (product.name.length > 20) {
-                val shortenedName = product.name.substring(0, 20) + "..."
+                val shortenedName = product.name.substring(0, 18) + "..."
                 binding.tvNameProduct.text = shortenedName
             } else {
                 binding.tvNameProduct.text = product.name

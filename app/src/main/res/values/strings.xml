@@ -81,4 +81,5 @@
     <string name="quantity">Quantity:</string>
     <string name="status">Status</string>
     <string name="name_color">black</string>
+    <string name="edit_image">Edit image</string>
 </resources>

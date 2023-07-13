@@ -51,7 +51,7 @@ class ImageSelectedAdapter(var context: Context) :
     override fun onBindViewHolder(holder: ImageSelectedViewHolder, position: Int) {
         val image = list[position]
         holder.bindingData(image)
-        Glide.with(context).load(image.url[0]).error(R.drawable.image_test)
+        Glide.with(context).load(image.url).error(R.drawable.image_test)
             .into(holder.binding.img)
         if (colorSelected == image.nameColor) {
             Log.d(
