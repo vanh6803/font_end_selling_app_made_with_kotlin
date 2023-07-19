@@ -4,15 +4,13 @@ class ProductToBill(
     val _id: String,
     val name: String,
     val price: Int,
-    val description: String,
-    val detail: Detail,
     val color: String,
     val quantity: Int,
     val status: String,
     val manufacturer: String,
-//    val image: String,
+    val image: String,
 ) {
     override fun toString(): String {
-        return "$_id - $name - $price - $description - $detail - $color - $status -  $manufacturer - $quantity"
+        return "$_id - $name - $price- $color - $status -  $manufacturer - $quantity -$image"
     }
 }

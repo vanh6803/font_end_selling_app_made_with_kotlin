@@ -71,7 +71,6 @@ class ColorSelectedAdapter(context: Context) :
         val color = list[position]
         holder.bindView(color)
 
-
         holder.binding.selected.setOnClickListener {
             onClickColorListener?.invoke(list[position].name)
             itemSelected = list[position].name

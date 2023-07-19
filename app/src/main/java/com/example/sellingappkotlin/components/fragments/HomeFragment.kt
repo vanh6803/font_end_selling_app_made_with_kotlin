@@ -25,7 +25,7 @@ import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
 import com.example.sellingappkotlin.models.HotProduct
 import com.example.sellingappkotlin.models.Manufacturer
 import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.utils.ApiServiceSellingApp
+import com.example.sellingappkotlin.utils.ApiServiceProduct
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -129,7 +129,7 @@ class HomeFragment : Fragment() {
 
     private fun calApiRequestProducts() {
         binding.layoutLoading.visibility = View.VISIBLE
-        ApiServiceSellingApp.apiServiceSellingApp.getListProduct()
+        ApiServiceProduct.apiServiceProduct.getListProduct()
             .enqueue(object : Callback<ApiResponseProduct> {
                 override fun onResponse(
                     call: Call<ApiResponseProduct>,
@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun callApiRequestManufactures() {
-        ApiServiceSellingApp.apiServiceSellingApp.getListManufacturers()
+        ApiServiceProduct.apiServiceProduct.getListManufacturers()
             .enqueue(object : Callback<ApiResponseManufacturer> {
                 override fun onResponse(
                     call: Call<ApiResponseManufacturer>,

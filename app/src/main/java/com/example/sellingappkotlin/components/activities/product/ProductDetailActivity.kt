@@ -9,9 +9,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.ColorSelectedAdapter
-import com.example.sellingappkotlin.adapters.ImageSelectedAdapter
 import com.example.sellingappkotlin.adapters.SlideShowAdapter
 import com.example.sellingappkotlin.databinding.ActivityProductDetailBinding
 import com.example.sellingappkotlin.databinding.BottomSheetDialogBuyNowBinding
@@ -19,7 +19,8 @@ import com.example.sellingappkotlin.databinding.DialogShowMoreProductBinding
 import com.example.sellingappkotlin.models.responseApi.ApiResponseProductDetail
 import com.example.sellingappkotlin.models.Product
 import com.example.sellingappkotlin.models.ProductToBill
-import com.example.sellingappkotlin.utils.ApiServiceSellingApp
+import com.example.sellingappkotlin.utils.ApiServiceProduct
+import com.example.sellingappkotlin.utils.Config
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,7 +33,6 @@ class ProductDetailActivity : AppCompatActivity() {
     private var product: Product? = null
     private lateinit var slideShowAdapter: SlideShowAdapter
     private lateinit var colorSelectedAdapter: ColorSelectedAdapter
-    private lateinit var imageSelectedAdapter: ImageSelectedAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
@@ -51,7 +51,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun callApi() {
         val id = intent.extras!!.getString("id")
-        ApiServiceSellingApp.apiServiceSellingApp.getProductFromId(id!!)
+        ApiServiceProduct.apiServiceProduct.getProductFromId(id!!)
             .enqueue(object : Callback<ApiResponseProductDetail> {
                 override fun onResponse(
                     call: Call<ApiResponseProductDetail>,
@@ -174,7 +174,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun showBottomDialog(value:String, OnclickListener: ()->Unit) {
         val binding: BottomSheetDialogBuyNowBinding =
             BottomSheetDialogBuyNowBinding.inflate(LayoutInflater.from(this))
-        val bottomDialog = BottomSheetDialog(this)
+        var bottomDialog = BottomSheetDialog(this)
         bottomDialog.setContentView(binding.root)
         bottomDialog.window?.setBackgroundDrawableResource(R.color.transparent)
 
@@ -183,15 +183,22 @@ class ProductDetailActivity : AppCompatActivity() {
         /*----------------------------------------------------------------*/
         //todo: Select a color, and then select the image according to the selected color
         binding.tvName.text = product?.name
-        imageSelectedAdapter = ImageSelectedAdapter(this)
-        product?.image?.let { imageSelectedAdapter.setData(it) }
-        binding.viewpagerImageSelected.adapter = imageSelectedAdapter
-        binding.viewpagerImageSelected.isEnabled = false
-
         binding.tvQuantity.text = "Total: ${product?.quantity}"
-
         product?.color?.let { colorSelectedAdapter.setData(it) }
         binding.rcvColor.adapter = colorSelectedAdapter
+        var imageSelected = ""
+        Glide.with(binding.root).load(product!!.image[0].url.replace("localhost",Config.LOCALHOST )).error(R.drawable.baseline_image_24)
+            .into(binding.imgProduct)
+
+        colorSelectedAdapter.onClickColorListener = {
+            Log.d("COLOR-SELECTED-PRODUCT-DETAIL",it )
+            for (image in product!!.image){
+                if ( image.nameColor== it){
+                    Glide.with(this).load(image.url.replace("localhost", Config.LOCALHOST)).error(R.drawable.baseline_image_24).into(binding.imgProduct)
+                    imageSelected = image.url
+                }
+            }
+        }
 
         /*----------------------------------------------------------------*/
         var index = 1
@@ -216,11 +223,10 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.edQuantity.setText(index.toString())
         }
 
-        binding.btnPlus
 
         binding.btnBuyNow.setText(value)
         binding.btnBuyNow.setOnClickListener {
-            var obj = ProductToBill("", product?.name!!, product?.price!!, product?.description!!, product?.detail!!, colorSelectedAdapter.itemSelected, index, product?.status!!, product?.manufacturer?.name!!)
+            var obj = ProductToBill("", product?.name!!, product?.price!!, colorSelectedAdapter.itemSelected, index, product?.status!!, product?.manufacturer?.name!!, imageSelected)
             Log.d("OBJECT", obj.toString())
             OnclickListener.invoke()
         }

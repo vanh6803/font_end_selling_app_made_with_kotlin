@@ -1,6 +1,6 @@
 package com.example.sellingappkotlin.utils
 
-class ApiServiceLocation {
+interface ApiServiceLocation {
 
     companion object {
         var baseUrl = ""

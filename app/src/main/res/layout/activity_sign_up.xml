@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".components.activities.auth.SignUpActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".components.activities.auth.SignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -85,18 +86,28 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/h7" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_border"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:fontFamily="@font/poppins_medium"
-                android:hint="@string/enter_your_phone_number_or_email"
-                android:imeOptions="actionNext"
-                android:inputType="text|textEmailAddress"
-                android:textColorHint="@color/gray69"
-                android:textSize="@dimen/h7"
-                android:autofillHints="emailAddress"/>
+                android:gravity="center_vertical"
+                android:padding="@dimen/_10sdp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
+                    android:background="@drawable/edittext_border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="@string/hint_username_or_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="text|textEmailAddress"
+                    android:textColorHint="@color/color_hint"
+                    android:textSize="@dimen/h7" />
+
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
 
@@ -123,24 +134,25 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edittext_border"
+                android:paddingTop="@dimen/_5sdp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/gray69"
-                android:background="@drawable/edittext_border"
-                android:paddingTop="@dimen/_5sdp">
+                app:passwordToggleTint="@color/gray69">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/baseline_lock_24"
-                    android:fontFamily="@font/poppins_medium"
+                    android:autofillHints="password"
                     android:background="@color/transparent"
-                    android:imeOptions="actionNext"
+                    android:fontFamily="@font/poppins_medium"
                     android:hint="@string/hint_password"
+                    android:imeOptions="actionNext"
                     android:inputType="textPassword"
+                    android:paddingStart="@dimen/_10sdp"
                     android:textColorHint="@color/gray69"
-                    android:textSize="@dimen/h7"
-                    android:autofillHints="password"/>
+                    android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -168,24 +180,25 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edittext_border"
+                android:paddingTop="@dimen/_5sdp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/gray69"
-                android:background="@drawable/edittext_border"
-                android:paddingTop="@dimen/_5sdp">
+                app:passwordToggleTint="@color/gray69">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_re_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/baseline_lock_24"
-                    android:fontFamily="@font/poppins_medium"
+                    android:autofillHints="password"
                     android:background="@color/transparent"
-                    android:imeOptions="actionDone"
+                    android:fontFamily="@font/poppins_medium"
                     android:hint="@string/Re_enter_your_password"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"
+                    android:paddingStart="@dimen/_10sdp"
                     android:textColorHint="@color/gray69"
-                    android:textSize="@dimen/h7"
-                    android:autofillHints="password"/>
+                    android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -221,7 +234,8 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/terms_amp_conditions"
                 android:textColor="@color/black"
-                android:textSize="@dimen/h7" />
+                android:textSize="@dimen/h7"
+                android:paddingHorizontal="@dimen/_5sdp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -239,7 +253,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_30sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@drawable/button_border"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/title_sign_up"

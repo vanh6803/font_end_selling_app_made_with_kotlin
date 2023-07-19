@@ -21,6 +21,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
         binding.tvTitle.text = "My Profile"
+
     }
 
 

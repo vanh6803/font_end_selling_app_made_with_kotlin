@@ -48,6 +48,15 @@ class PersonFragment : Fragment() {
         binding.profileImage.setOnClickListener{
             startActivity(Intent(requireContext(), ProfileActivity::class.java))
         }
+        binding.btnEditProfile.setOnClickListener{
+
+        }
+        binding.btnChangePassword.setOnClickListener {
+
+        }
+        binding.btnMyOder.setOnClickListener {
+
+        }
     }
 
     companion object {

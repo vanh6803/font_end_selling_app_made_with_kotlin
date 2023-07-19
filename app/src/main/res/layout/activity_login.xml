@@ -86,18 +86,27 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/h7" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_border"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:fontFamily="@font/poppins_medium"
-                android:hint="@string/hint_username_or_email"
-                android:imeOptions="actionNext"
-                android:inputType="text|textEmailAddress"
-                android:textColorHint="@color/color_hint"
-                android:textSize="@dimen/h7"
-                android:autofillHints="emailAddress" />
+                android:gravity="center_vertical"
+                android:padding="@dimen/_10sdp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
+                    android:background="@drawable/edittext_border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="@string/hint_username_or_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="text|textEmailAddress"
+                    android:textColorHint="@color/color_hint"
+                    android:textSize="@dimen/h7" />
+
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -124,23 +133,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_border"
-                android:paddingTop="@dimen/_5sdp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/gray69">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="password"
                     android:background="@color/transparent"
-                    android:drawableStart="@drawable/baseline_lock_24"
                     android:fontFamily="@font/poppins_medium"
-
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:textColorHint="@color/color_hint"
                     android:textSize="@dimen/h7"
-                    android:autofillHints="password" />
+                    android:paddingStart="@dimen/_10sdp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -196,9 +203,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/google"
-                    android:paddingVertical="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:text="@string/google"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h6" />
             </LinearLayout>

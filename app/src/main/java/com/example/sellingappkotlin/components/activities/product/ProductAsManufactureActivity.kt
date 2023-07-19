@@ -11,7 +11,7 @@ import com.example.sellingappkotlin.databinding.ActivityProductAsManufactureBind
 import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
 import com.example.sellingappkotlin.models.Manufacturer
 import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.utils.ApiServiceSellingApp
+import com.example.sellingappkotlin.utils.ApiServiceProduct
 import com.example.sellingappkotlin.utils.Config
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,7 +46,7 @@ class ProductAsManufactureActivity : AppCompatActivity() {
     }
 
     fun callApi(id: String){
-        ApiServiceSellingApp.apiServiceSellingApp.getListProductFormManufacturers(id)
+        ApiServiceProduct.apiServiceProduct.getListProductFormManufacturers(id)
             .enqueue(object : Callback<ApiResponseProduct> {
                 override fun onResponse(
                     call: Call<ApiResponseProduct>,

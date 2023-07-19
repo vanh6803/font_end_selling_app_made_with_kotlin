@@ -10,7 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiServiceSellingApp {
+interface ApiServiceProduct {
     // todo: get manufacturer
     @GET("manufacturer")
     fun getListManufacturers(): Call<ApiResponseManufacturer>
@@ -35,8 +35,8 @@ interface ApiServiceSellingApp {
                 .build()
         }
 
-        val apiServiceSellingApp: ApiServiceSellingApp by lazy {
-            retrofit.create(ApiServiceSellingApp::class.java)
+        val apiServiceProduct: ApiServiceProduct by lazy {
+            retrofit.create(ApiServiceProduct::class.java)
         }
 
         }
