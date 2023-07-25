@@ -4,12 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.components.activities.MainActivity
 import com.example.sellingappkotlin.databinding.ActivityLoginBinding
+import com.example.sellingappkotlin.models.Account
+import com.example.sellingappkotlin.utils.ApiServiceUser
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private val backPressInterval  = 2000 //Time allowed between two back presses (2 seconds)
     private var doubleBackToExitPressedOnce: Boolean = false
     private var handle = Handler(Looper.getMainLooper())
+    private lateinit var account: Account
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +38,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            var email = binding.edtEmail.text.toString()
+            var password = binding.edtPassword.text.toString()
+            account = Account(email, password, 1)
+            callApiLogin(account)
         }
+    }
+
+    private fun callApiLogin(account: Account){
+        ApiServiceUser.apiServiceUser.login(account).enqueue(object: Callback<Account>{
+            override fun onResponse(call: Call<Account>, response: Response<Account>) {
+                Log.d("AAA", "login success")
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onFailure(call: Call<Account>, t: Throwable) {
+                Log.d("callApiLogin-onFailure",t.message.toString())
+            }
+        })
     }
 
     override fun onBackPressed() {

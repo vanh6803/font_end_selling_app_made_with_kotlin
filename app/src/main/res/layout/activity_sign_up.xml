@@ -103,7 +103,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:hint="@string/hint_username_or_email"
                     android:imeOptions="actionNext"
-                    android:inputType="text|textEmailAddress"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="@color/color_hint"
                     android:textSize="@dimen/h7" />
 

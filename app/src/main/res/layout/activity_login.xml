@@ -95,6 +95,7 @@
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="emailAddress"
@@ -138,6 +139,7 @@
                 app:passwordToggleTint="@color/gray69">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="password"
