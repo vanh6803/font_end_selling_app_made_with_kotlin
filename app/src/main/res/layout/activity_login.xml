@@ -108,6 +108,13 @@
                     android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -152,6 +159,13 @@
                     android:paddingStart="@dimen/_10sdp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
 
 
         </LinearLayout>

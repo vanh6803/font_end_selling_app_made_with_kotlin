@@ -108,6 +108,13 @@
                     android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
         </LinearLayout>
 
 
@@ -155,6 +162,13 @@
                     android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -201,6 +215,13 @@
                     android:textSize="@dimen/h7" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_re_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -209,34 +230,49 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/box_confirm_password">
 
-            <CheckBox
-                android:id="@+id/checkBox"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/primary_color"
-                android:fontFamily="@font/poppins_medium" />
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary_color"
+                    android:fontFamily="@font/poppins_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/i_agree_to_all_the"
+                    android:textSize="@dimen/h8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/terms_amp_conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h7"
+                    android:paddingHorizontal="@dimen/_5sdp"/>
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/error_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/i_agree_to_all_the"
-                android:textSize="@dimen/h8" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/terms_amp_conditions"
-                android:textColor="@color/black"
-                android:textSize="@dimen/h7"
-                android:paddingHorizontal="@dimen/_5sdp"/>
+                android:text="* error"
+                android:textColor="@color/red"
+                android:visibility="gone"/>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -259,8 +295,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/h4" />
-
-
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

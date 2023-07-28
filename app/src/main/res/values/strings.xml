@@ -82,4 +82,13 @@
     <string name="status">Status</string>
     <string name="name_color">black</string>
     <string name="edit_image">Edit image</string>
+    <string name="please_enter_email">* Please enter email</string>
+    <string name="please_enter_password">* Please enter password</string>
+    <string name="please_re_enter_password">* Please re-enter password</string>
+    <string name="email_already_exists">* Email already exists</string>
+    <string name="password_can_more_than_6_characters">* password can more than 6 characters</string>
+    <string name="please_enter_the_correct_password">* Please enter the correct password</string>
+    <string name="required">* required</string>
+    <string name="wrong_account_or_password">* wrong account or password</string>
+    <string name="must_not_be_left_blank">* must not be left blank</string>
 </resources>

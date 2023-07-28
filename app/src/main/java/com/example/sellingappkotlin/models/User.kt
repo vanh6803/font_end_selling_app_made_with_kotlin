@@ -1,6 +1,6 @@
 package com.example.sellingappkotlin.models
 
-class User(
+data class User(
     var _id: String,
     var fullName: String,
     var username: String,
