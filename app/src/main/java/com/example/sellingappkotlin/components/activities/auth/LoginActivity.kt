@@ -13,8 +13,10 @@ import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.components.activities.MainActivity
 import com.example.sellingappkotlin.databinding.ActivityLoginBinding
 import com.example.sellingappkotlin.models.Account
+import com.example.sellingappkotlin.models.User
 import com.example.sellingappkotlin.models.responseApi.ApiResponseLogin
 import com.example.sellingappkotlin.utils.ApiServiceUser
+import com.example.sellingappkotlin.utils.Constant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,16 +66,18 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<ApiResponseLogin>,
                 response: Response<ApiResponseLogin>
             ) {
-                val result = response.body()
-                val message = result?.message
-                Log.d("result", "${response.body().toString()}")
+                val result =response.body()
                 if (response.isSuccessful) {
                     binding.errorEmail.visibility = View.GONE
                     binding.errorPassword.visibility = View.GONE
+                    val user:User = result!!.data
+                    Log.d("User", user.toString())
+                    Constant.token = user.token
+                    Log.d("token", Constant.token)
+                    Constant.uid = user._id
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-
                     binding.errorEmail.visibility = View.VISIBLE
                     binding.errorPassword.visibility = View.VISIBLE
                     binding.errorEmail.text = getString(R.string.wrong_account_or_password)

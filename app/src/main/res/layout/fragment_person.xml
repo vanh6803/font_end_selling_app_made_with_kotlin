@@ -20,22 +20,24 @@
         app:civ_border_width="1dp" />
 
     <TextView
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/aclonica"
-        android:text="@string/app_name"
+        android:text="@string/username_default"
         android:textColor="@color/black"
         android:textSize="@dimen/h5" />
 
     <TextView
+        android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/aclonica"
-        android:text="@string/default_emai"
+        android:text="@string/email_default"
         android:textSize="@dimen/h8" />
 
     <View
@@ -98,29 +100,29 @@
             android:textSize="@dimen/h6"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/btn_detail_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:orientation="horizontal"
-        android:weightSum="7"
-        android:background="@drawable/custom_edittext">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_account_circle_24" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/detail_profile"
-            android:textColor="@color/black"
-            android:fontFamily="@font/acme"
-            android:textSize="@dimen/h6"/>
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/btn_detail_profile"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="@dimen/_40sdp"-->
+<!--        android:layout_marginTop="@dimen/_20sdp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:weightSum="7"-->
+<!--        android:background="@drawable/custom_edittext">-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:src="@drawable/baseline_account_circle_24" />-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="6"-->
+<!--            android:text="@string/detail_profile"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:fontFamily="@font/acme"-->
+<!--            android:textSize="@dimen/h6"/>-->
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/btn_change_password"

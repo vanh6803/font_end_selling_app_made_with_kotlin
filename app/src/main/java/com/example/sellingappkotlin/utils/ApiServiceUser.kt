@@ -5,11 +5,13 @@ import com.example.sellingappkotlin.models.CheckEmail
 import com.example.sellingappkotlin.models.User
 import com.example.sellingappkotlin.models.responseApi.ApiResponseAccount
 import com.example.sellingappkotlin.models.responseApi.ApiResponseLogin
+import com.example.sellingappkotlin.models.responseApi.ApiResponseUser
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -25,7 +27,11 @@ interface ApiServiceUser {
     fun checkEmail(@Query("email") email: String): Call<CheckEmail>
 
     @GET("logout")
-    fun logout(): Call<Void>
+    fun logout(@Header("Authorization") authToken: String ): Call<Void>
+
+    @GET("profile")
+    fun getProfile(@Header("Authorization") authToken: String ): Call<ApiResponseUser>
+
 
     companion object{
         var baseUrl = "${Config.URL}/api/"

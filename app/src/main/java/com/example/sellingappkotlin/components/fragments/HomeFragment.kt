@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.HotProductAdapter
 import com.example.sellingappkotlin.adapters.ManufacturerAdapter
@@ -25,7 +26,11 @@ import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
 import com.example.sellingappkotlin.models.HotProduct
 import com.example.sellingappkotlin.models.Manufacturer
 import com.example.sellingappkotlin.models.Product
+import com.example.sellingappkotlin.models.User
+import com.example.sellingappkotlin.models.responseApi.ApiResponseUser
 import com.example.sellingappkotlin.utils.ApiServiceProduct
+import com.example.sellingappkotlin.utils.ApiServiceUser
+import com.example.sellingappkotlin.utils.Constant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,6 +52,7 @@ class HomeFragment : Fragment() {
     private lateinit var listManufacture: MutableList<Manufacturer>
     private lateinit var manufacturerAdapter: ManufacturerAdapter
 
+    private lateinit var user: User
 
     private var handle = Handler(Looper.getMainLooper())
     private var runnable = Runnable {
@@ -71,6 +77,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        getProfile(Constant.token)
         slideImageHotProduct()
         showProducts()
         showManufactures()
@@ -156,7 +163,7 @@ class HomeFragment : Fragment() {
             })
     }
 
-    private fun showManufactures() {
+    private fun showManufactures()  {
         listManufacture = mutableListOf()
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -189,6 +196,28 @@ class HomeFragment : Fragment() {
                 }
 
             })
+    }
+
+    private fun getProfile(token: String){
+        ApiServiceUser.apiServiceUser.getProfile("Bearer $token").enqueue(object : Callback<ApiResponseUser>{
+            override fun onResponse(
+                call: Call<ApiResponseUser>,
+                response: Response<ApiResponseUser>
+            ) {
+                val result = response.body()
+                user = result!!.data
+                if (user.username == null){
+                    binding.tvGreeting.text = "Welcome"
+                }else{
+                    binding.tvGreeting.text = "Hello, ${user.username}"
+                }
+                Glide.with(requireContext()).load(user.avatar).error(R.drawable.avatar_default).into(binding.imgProfile)
+            }
+
+            override fun onFailure(call: Call<ApiResponseUser>, t: Throwable) {
+                Log.d("PersonFragment-getProfile-onFailure","${t.message}")
+            }
+        })
     }
 
     private fun showActivitySearch() {

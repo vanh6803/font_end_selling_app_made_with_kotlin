@@ -21,6 +21,7 @@ import com.example.sellingappkotlin.models.Product
 import com.example.sellingappkotlin.models.ProductToBill
 import com.example.sellingappkotlin.utils.ApiServiceProduct
 import com.example.sellingappkotlin.utils.Config
+import com.example.sellingappkotlin.utils.Constant
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -226,7 +227,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         binding.btnBuyNow.setText(value)
         binding.btnBuyNow.setOnClickListener {
-            var obj = ProductToBill("", product?.name!!, product?.price!!, colorSelectedAdapter.itemSelected, index, product?.status!!, product?.manufacturer?.name!!, imageSelected)
+            var obj = ProductToBill("",Constant.uid ,product?.name!!, product?.price!!, colorSelectedAdapter.itemSelected, index, product?.status!!, product?.manufacturer?.name!!, imageSelected)
             Log.d("OBJECT", obj.toString())
             OnclickListener.invoke()
         }

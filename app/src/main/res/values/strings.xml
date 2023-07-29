@@ -91,4 +91,6 @@
     <string name="required">* required</string>
     <string name="wrong_account_or_password">* wrong account or password</string>
     <string name="must_not_be_left_blank">* must not be left blank</string>
+    <string name="username_default">username</string>
+    <string name="email_default">email@gmail.com</string>
 </resources>

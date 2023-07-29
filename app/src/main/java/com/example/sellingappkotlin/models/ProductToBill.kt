@@ -1,16 +1,17 @@
 package com.example.sellingappkotlin.models
 
 class ProductToBill(
-    val _id: String,
-    val name: String,
-    val price: Int,
-    val color: String,
-    val quantity: Int,
-    val status: String,
-    val manufacturer: String,
-    val image: String,
+    var _id: String,
+    var uid: String,
+    var name: String,
+    var price: Int,
+    var color: String,
+    var quantity: Int,
+    var status: String,
+    var manufacturer: String,
+    var image: String,
 ) {
     override fun toString(): String {
-        return "$_id - $name - $price- $color - $status -  $manufacturer - $quantity -$image"
+        return "$_id- $uid - $name - $price- $color - $status -  $manufacturer - $quantity -$image"
     }
 }
