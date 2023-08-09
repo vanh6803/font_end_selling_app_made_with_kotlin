@@ -19,9 +19,11 @@ import java.util.Locale
 class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var list = mutableListOf<Product>()
+    private var fullList = ArrayList<Product>()
 
     fun setData(list: MutableList<Product>) {
         this.list = list
+        this.fullList = ArrayList(list)
         notifyDataSetChanged()
     }
 
@@ -44,6 +46,16 @@ class ProductAdapter(var context: Context) : Adapter<ProductAdapter.ProductViewH
             intent.putExtra("id", list[position]._id)
             context.startActivity(intent)
         }
+    }
+
+    fun filterList(search: String){
+        list.clear()
+        for(item in fullList){
+            if (item.name.lowercase().contains(search.lowercase())){
+                list.add(item)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     class ProductViewHolder(val binding: LayoutItemProductBinding) : ViewHolder(binding.root) {

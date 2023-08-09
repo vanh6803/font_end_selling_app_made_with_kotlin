@@ -10,30 +10,31 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:elevation="@dimen/_10sdp"
             android:background="@color/white"
-            >
+            android:elevation="@dimen/_10sdp"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
             <ImageView
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/baseline_arrow_back_ios_24"
-                android:padding="@dimen/_10sdp"/>
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/baseline_arrow_back_ios_24" />
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/app_name"
-                android:textSize="@dimen/h5"
                 android:fontFamily="@font/acme"
+                android:gravity="center_vertical"
+                android:text="@string/app_name"
                 android:textColor="@color/primary_color"
-                android:gravity="center_vertical"/>
+                android:textSize="@dimen/h5" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -43,44 +44,206 @@
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="?attr/actionBarSize">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_centerInParent="true"
             android:elevation="10dp"
-            android:src="@drawable/avatar"
+            android:src="@drawable/avatar_default"
             app:civ_border_color="@color/gray69"
-            app:civ_border_width="1dp"
-            android:layout_centerInParent="true"/>
+            app:civ_border_width="1dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit_image"
-            android:textSize="@dimen/h6"
-            android:textColor="@color/white"
-            android:background="@color/gray69"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:padding="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray69"
             android:drawableEnd="@drawable/ic_edit"
             android:drawablePadding="@dimen/_5sdp"
-            android:drawableTint="@color/white"/>
+            android:drawableTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/edit_image"
+            android:textColor="@color/white"
+            android:textSize="@dimen/h6" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/black"
-        android:layout_marginTop="@dimen/_5sdp"/>
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/black" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_info"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/layout_infomation_user"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_5sdp"
-        app:fastScrollEnabled="false"/>
+        android:padding="@dimen/_10sdp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:hint="@string/full_name"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/layout_full_name"
+            app:layout_constraintStart_toStartOf="@id/layout_full_name"
+            app:layout_constraintTop_toBottomOf="@id/layout_full_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:hint="@string/enter_username"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/layout_username"
+            app:layout_constraintStart_toStartOf="@id/layout_username"
+            app:layout_constraintTop_toBottomOf="@id/layout_username">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:hint="Enter phone number"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/layout_phone"
+            app:layout_constraintStart_toStartOf="@id/layout_phone"
+            app:layout_constraintTop_toBottomOf="@id/layout_phone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender:"
+                android:textSize="@dimen/h6" />
+
+            <RadioGroup
+                android:id="@+id/radio_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary_color"
+                    android:checked="true"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/male" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary_color"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/female" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_select_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/custom_edittext"
+            app:layout_constraintEnd_toEndOf="@id/layout_gender"
+            app:layout_constraintStart_toStartOf="@id/layout_gender"
+            app:layout_constraintTop_toBottomOf="@id/layout_gender">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/select_birthday"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Select birthday"
+                android:textSize="@dimen/h6" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_calendar_month_24"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@id/layout_select_date"
+            app:layout_constraintStart_toStartOf="@id/layout_select_date"
+            app:layout_constraintTop_toBottomOf="@id/layout_select_date"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="cancel"
+                android:background="@drawable/custom_edittext"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:background="@drawable/custom_edittext"
+                android:backgroundTint="@color/primary_color"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

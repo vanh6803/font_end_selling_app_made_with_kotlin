@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +19,6 @@ import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.HotProductAdapter
 import com.example.sellingappkotlin.adapters.ManufacturerAdapter
 import com.example.sellingappkotlin.adapters.ProductAdapter
-import com.example.sellingappkotlin.components.activities.product.SearchActivity
 import com.example.sellingappkotlin.components.activities.user.ProfileActivity
 import com.example.sellingappkotlin.databinding.FragmentHomeBinding
 import com.example.sellingappkotlin.models.responseApi.ApiResponseManufacturer
@@ -76,12 +76,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView()
         getProfile(Constant.token)
         slideImageHotProduct()
         showProducts()
         showManufactures()
-        showActivitySearch()
         initRefresh()
     }
 
@@ -91,8 +91,28 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        binding.imgProfile.setOnClickListener{
-            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+//        binding.imgProfile.setOnClickListener {
+//            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+//        }
+
+        productAdapter = ProductAdapter(requireContext())
+        binding.rcvProducts.adapter = productAdapter
+
+        binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    productAdapter.filterList(newText)
+                }
+                return true
+            }
+        })
+
+        binding.btnAll.setOnClickListener {
+            showProducts()
         }
     }
 
@@ -163,7 +183,7 @@ class HomeFragment : Fragment() {
             })
     }
 
-    private fun showManufactures()  {
+    private fun showManufactures() {
         listManufacture = mutableListOf()
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -198,45 +218,34 @@ class HomeFragment : Fragment() {
             })
     }
 
-    private fun getProfile(token: String){
-        ApiServiceUser.apiServiceUser.getProfile("Bearer $token").enqueue(object : Callback<ApiResponseUser>{
-            override fun onResponse(
-                call: Call<ApiResponseUser>,
-                response: Response<ApiResponseUser>
-            ) {
-                val result = response.body()
-                user = result!!.data
-                if (user.username == null){
-                    binding.tvGreeting.text = "Welcome"
-                }else{
-                    binding.tvGreeting.text = "Hello, ${user.username}"
+    private fun getProfile(token: String) {
+        ApiServiceUser.apiServiceUser.getProfile("Bearer $token")
+            .enqueue(object : Callback<ApiResponseUser> {
+                override fun onResponse(
+                    call: Call<ApiResponseUser>,
+                    response: Response<ApiResponseUser>
+                ) {
+                    val result = response.body()
+                    user = result!!.data
+                    if (user.username == null) {
+                        binding.tvGreeting.text = "Welcome"
+                    } else {
+                        binding.tvGreeting.text = "Hello, ${user.username}"
+                    }
+                    Glide.with(requireContext()).load(user.avatar).error(R.drawable.avatar_default)
+                        .into(binding.imgProfile)
                 }
-                Glide.with(requireContext()).load(user.avatar).error(R.drawable.avatar_default).into(binding.imgProfile)
-            }
 
-            override fun onFailure(call: Call<ApiResponseUser>, t: Throwable) {
-                Log.d("PersonFragment-getProfile-onFailure","${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<ApiResponseUser>, t: Throwable) {
+                    Log.d("PersonFragment-getProfile-onFailure", "${t.message}")
+                }
+            })
     }
 
-    private fun showActivitySearch() {
-        binding.edtSearch.setOnClickListener {
-            nextActivitySearch()
-        }
-    }
-
-    private fun nextActivitySearch() {
-        val intent = Intent(requireContext(), SearchActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun initRefresh(){
+    private fun initRefresh() {
         binding.layoutRefresh.setOnRefreshListener {
-            slideImageHotProduct()
             showProducts()
             showManufactures()
-            showActivitySearch()
             binding.layoutRefresh.isRefreshing = false
         }
     }
@@ -244,5 +253,12 @@ class HomeFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding == null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showProducts()
+        showManufactures()
+        getProfile(Constant.token)
     }
 }

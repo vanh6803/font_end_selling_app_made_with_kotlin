@@ -26,9 +26,6 @@
             android:name=".components.activities.product.ProductAsManufactureActivity"
             android:exported="false" />
         <activity
-            android:name=".components.activities.product.SearchActivity"
-            android:exported="false" />
-        <activity
             android:name=".components.activities.product.ProductDetailActivity"
             android:exported="false" />
         <activity
@@ -39,7 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".components.activities.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".components.activities.SplashActivity"
             android:exported="true">

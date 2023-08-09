@@ -26,6 +26,7 @@ class PersonFragment : Fragment() {
 
     private var _binding: FragmentPersonBinding? = null
 
+    private lateinit var user: User
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,10 +55,14 @@ class PersonFragment : Fragment() {
             callApiLogout(Constant.token)
         }
         binding.profileImage.setOnClickListener{
-            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            intent.putExtra("user",user)
+            startActivity(intent)
         }
         binding.btnEditProfile.setOnClickListener{
-            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            intent.putExtra("user",user)
+            startActivity(intent)
         }
         binding.btnChangePassword.setOnClickListener {
 
@@ -66,7 +71,6 @@ class PersonFragment : Fragment() {
 
         }
     }
-
 
     private fun callApiLogout(token: String) {
         ApiServiceUser.apiServiceUser.logout("Bearer $token").enqueue(object: Callback<Void>{
@@ -92,7 +96,7 @@ class PersonFragment : Fragment() {
                 response: Response<ApiResponseUser>
             ) {
                 val result = response.body()
-                val user: User= result!!.data
+                 user = result!!.data
                 Glide.with(requireContext()).load(user.avatar).error(R.drawable.avatar_default).into(binding.profileImage)
                 binding.tvUsername.text = user.username ?: getString(R.string.username_default)
                 binding.tvEmail.text = user.email?: getString(R.string.email_default)
@@ -112,5 +116,10 @@ class PersonFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProfile(Constant.token)
     }
 }

@@ -86,28 +86,42 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/h7" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:gravity="center_vertical"
-                android:padding="@dimen/_10sdp"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_email"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints="emailAddress"
                     android:background="@drawable/edittext_border"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="@string/hint_username_or_email"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/color_hint"
-                    android:textSize="@dimen/h7" />
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/_10sdp"
+                    app:hintEnabled="false">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="emailAddress"
+                        android:background="@drawable/edittext_border"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="@string/hint_username_or_email"
+                        android:imeOptions="actionNext"
+                        android:inputType="text|textEmailAddress"
+                        android:textColorHint="@color/color_hint"
+                        android:textSize="@dimen/h7" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_clear_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/baseline_close_24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
             <TextView
                 android:id="@+id/error_email"
                 android:layout_width="wrap_content"
@@ -187,7 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="@string/password"
+                android:text="@string/confirm_password"
                 android:textColor="@color/black"
                 android:textSize="@dimen/h7" />
 

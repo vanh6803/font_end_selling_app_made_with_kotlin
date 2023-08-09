@@ -13,6 +13,8 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiServiceUser {
@@ -30,7 +32,10 @@ interface ApiServiceUser {
     fun logout(@Header("Authorization") authToken: String ): Call<Void>
 
     @GET("profile")
-    fun getProfile(@Header("Authorization") authToken: String ): Call<ApiResponseUser>
+    fun getProfile(@Header("Authorization") authToken: String): Call<ApiResponseUser>
+
+    @PUT("account/update-profile/{id}")
+    fun updateProfile(@Path("id") id:String  ,@Header("Authorization") authToken: String, @Body user:User): Call<Void>
 
 
     companion object{

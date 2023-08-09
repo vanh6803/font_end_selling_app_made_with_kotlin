@@ -12,6 +12,7 @@ import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.ActivitySignUpBinding
 import com.example.sellingappkotlin.models.Account
 import com.example.sellingappkotlin.utils.ApiServiceUser
+import com.example.sellingappkotlin.utils.MyTechWatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -29,9 +30,21 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initUi()
+
+    }
+
+    private fun initUi() {
         binding.idTitleLogin.setOnClickListener {
             nextActivity()
         }
+
+//        val myTechWatcher = MyTechWatcher(this, binding.edtEmail, binding.imgClearText, binding.errorEmail)
+//        binding.edtEmail.addTextChangedListener(myTechWatcher)
+//
+//        binding.imgClearText.setOnClickListener {
+//            binding.edtEmail.setText("")
+//        }
 
         binding.btnSignup.setOnClickListener {
             val email: String = binding.edtEmail.text.toString()
@@ -49,7 +62,6 @@ class SignUpActivity : AppCompatActivity() {
                 binding.errorCheck.text = getString(R.string.required)
             }
         }
-
     }
 
     private fun callApiRegisterAccount(account: Account) {
@@ -76,7 +88,7 @@ class SignUpActivity : AppCompatActivity() {
             }
             if (response.isSuccessful) {
                 val checkEmailResponse = response.body()
-                check = checkEmailResponse?.check ?: false
+                check = checkEmailResponse?.check!!
             }
         }
         return check
