@@ -1,20 +1,29 @@
 package com.example.sellingappkotlin.components.activities.user
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.ActivityProfileBinding
 import com.example.sellingappkotlin.models.User
 import com.example.sellingappkotlin.utils.ApiServiceUser
 import com.example.sellingappkotlin.utils.Constant
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.util.Calendar
 import java.util.Locale
 
@@ -27,6 +36,9 @@ class ProfileActivity : AppCompatActivity() {
     private var birthday: String = ""
     private var gender: Int = 0
     private lateinit var user: User
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(LayoutInflater.from(this))
@@ -39,6 +51,7 @@ class ProfileActivity : AppCompatActivity() {
         user = intent.getSerializableExtra("user") as User
 
         Log.d("AAA", user.toString())
+
 
         binding.btnBack.setOnClickListener {
             finish()
@@ -121,6 +134,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
     }
+
 
 
 }

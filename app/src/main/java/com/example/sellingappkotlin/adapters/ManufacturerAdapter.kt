@@ -1,13 +1,11 @@
 package com.example.sellingappkotlin.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.sellingappkotlin.components.activities.product.ProductAsManufactureActivity
 import com.example.sellingappkotlin.databinding.LayoutItemManufacturerBinding
 import com.example.sellingappkotlin.models.Manufacturer
 
@@ -15,6 +13,7 @@ import com.example.sellingappkotlin.models.Manufacturer
 class ManufacturerAdapter(var context: Context) : Adapter<ManufacturerAdapter.ManufacturerViewHolder>() {
 
     private var list = mutableListOf<Manufacturer>()
+    var onClickManufacturerListener: ((id:String) -> Unit)? = null
 
     fun setData(list: MutableList<Manufacturer>) {
         this.list = list
@@ -34,13 +33,12 @@ class ManufacturerAdapter(var context: Context) : Adapter<ManufacturerAdapter.Ma
     override fun onBindViewHolder(holder: ManufacturerViewHolder, position: Int) {
         val obj: Manufacturer = list[position]
         holder.bindView(obj)
+
+
         holder.binding.layoutItemManufacture.setOnClickListener {
-            val intent = Intent(context, ProductAsManufactureActivity::class.java)
-            intent.putExtra("name", obj.name)
-            intent.putExtra("logo", obj.logo)
-            intent.putExtra("id",obj._id)
-            Log.d("id", obj._id)
-            context.startActivity(intent)
+            onClickManufacturerListener?.invoke(list[position]._id)
+            Log.d("CCC", "${onClickManufacturerListener?.invoke(list[position]._id)}")
+            notifyDataSetChanged()
         }
     }
 

@@ -38,37 +38,37 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/layout_edit_profile"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="?attr/actionBarSize">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/layout_edit_avatar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="?attr/actionBarSize">-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:elevation="10dp"
-            android:src="@drawable/avatar_default"
-            app:civ_border_color="@color/gray69"
-            app:civ_border_width="1dp" />
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/profile_image"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:elevation="10dp"-->
+<!--            android:src="@drawable/avatar_default"-->
+<!--            app:civ_border_color="@color/gray69"-->
+<!--            app:civ_border_width="1dp" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gray69"
-            android:drawableEnd="@drawable/ic_edit"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableTint="@color/white"
-            android:padding="@dimen/_10sdp"
-            android:text="@string/edit_image"
-            android:textColor="@color/white"
-            android:textSize="@dimen/h6" />
-    </RelativeLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:background="@color/gray69"-->
+<!--            android:drawableEnd="@drawable/ic_edit"-->
+<!--            android:drawablePadding="@dimen/_5sdp"-->
+<!--            android:drawableTint="@color/white"-->
+<!--            android:padding="@dimen/_10sdp"-->
+<!--            android:text="@string/edit_image"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/h6" />-->
+<!--    </RelativeLayout>-->
 
     <View
         android:layout_width="match_parent"

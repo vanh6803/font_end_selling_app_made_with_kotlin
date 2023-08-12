@@ -1,6 +1,5 @@
 package com.example.sellingappkotlin.components.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,7 +18,6 @@ import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.adapters.HotProductAdapter
 import com.example.sellingappkotlin.adapters.ManufacturerAdapter
 import com.example.sellingappkotlin.adapters.ProductAdapter
-import com.example.sellingappkotlin.components.activities.user.ProfileActivity
 import com.example.sellingappkotlin.databinding.FragmentHomeBinding
 import com.example.sellingappkotlin.models.responseApi.ApiResponseManufacturer
 import com.example.sellingappkotlin.models.responseApi.ApiResponseProduct
@@ -30,6 +28,7 @@ import com.example.sellingappkotlin.models.User
 import com.example.sellingappkotlin.models.responseApi.ApiResponseUser
 import com.example.sellingappkotlin.utils.ApiServiceProduct
 import com.example.sellingappkotlin.utils.ApiServiceUser
+import com.example.sellingappkotlin.utils.Config
 import com.example.sellingappkotlin.utils.Constant
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,11 +77,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        getProfile(Constant.token)
-        slideImageHotProduct()
-        showProducts()
-        showManufactures()
-        initRefresh()
     }
 
     companion object {
@@ -91,9 +85,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-//        binding.imgProfile.setOnClickListener {
-//            startActivity(Intent(requireContext(), ProfileActivity::class.java))
-//        }
+        getProfile(Constant.token)
+        slideImageHotProduct()
+        showProducts()
+        showManufactures()
+        initRefresh()
 
         productAdapter = ProductAdapter(requireContext())
         binding.rcvProducts.adapter = productAdapter
@@ -111,9 +107,15 @@ class HomeFragment : Fragment() {
             }
         })
 
+
+
         binding.btnAll.setOnClickListener {
             showProducts()
         }
+
+        binding.btnAll.setOnClickListener { showProducts() }
+
+
     }
 
     private fun showListHotProducts(): MutableList<HotProduct> {
@@ -204,6 +206,9 @@ class HomeFragment : Fragment() {
                     manufacturerAdapter = ManufacturerAdapter(requireContext())
                     manufacturerAdapter.setData(listManufacture)
                     binding.rcvManufacturer.adapter = manufacturerAdapter
+                    manufacturerAdapter.onClickManufacturerListener = { id ->
+                        filterProduct(id)
+                    }
                 }
 
                 override fun onFailure(call: Call<ApiResponseManufacturer>, t: Throwable) {
@@ -232,13 +237,40 @@ class HomeFragment : Fragment() {
                     } else {
                         binding.tvGreeting.text = "Hello, ${user.username}"
                     }
-                    Glide.with(requireContext()).load(user.avatar).error(R.drawable.avatar_default)
+                    Glide.with(requireContext()).load(user.avatar.replace("localhost", Config.LOCALHOST)).error(R.drawable.avatar_default)
                         .into(binding.imgProfile)
                 }
 
                 override fun onFailure(call: Call<ApiResponseUser>, t: Throwable) {
                     Log.d("PersonFragment-getProfile-onFailure", "${t.message}")
                 }
+            })
+    }
+
+    fun filterProduct(id: String){
+        ApiServiceProduct.apiServiceProduct.getListProductFormManufacturers(id)
+            .enqueue(object : Callback<ApiResponseProduct> {
+                override fun onResponse(
+                    call: Call<ApiResponseProduct>,
+                    response: Response<ApiResponseProduct>
+                ) {
+                    val apiResponseProduct = response.body()
+                    listProduct = apiResponseProduct!!.data
+                    Log.d("data from api", "${listProduct.size}")
+                    productAdapter = ProductAdapter(requireContext())
+                    productAdapter.setData(listProduct)
+                    binding.rcvProducts.adapter = productAdapter
+                }
+
+                override fun onFailure(call: Call<ApiResponseProduct>, t: Throwable) {
+                    Toast.makeText(
+                        requireContext(),
+                        "call api fail due to ${t.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e("call api product", "${t.message}")
+                }
+
             })
     }
 
