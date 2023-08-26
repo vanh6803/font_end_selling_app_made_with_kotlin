@@ -1,29 +1,20 @@
 package com.example.sellingappkotlin.components.activities.user
 
-import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import com.example.sellingappkotlin.R
 import com.example.sellingappkotlin.databinding.ActivityProfileBinding
 import com.example.sellingappkotlin.models.User
 import com.example.sellingappkotlin.utils.ApiServiceUser
 import com.example.sellingappkotlin.utils.Constant
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 import java.util.Calendar
 import java.util.Locale
 
@@ -54,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
 
         binding.btnBack.setOnClickListener {
-            finish()
+            onBackPressedDispatcher.onBackPressed()
         }
         binding.tvTitle.text = getString(R.string.my_profile)
 
@@ -91,7 +82,7 @@ class ProfileActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        binding.radioGender.setOnCheckedChangeListener { group, checkedId ->
+        binding.radioGender.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radio_male -> {
                     gender = 0
@@ -107,16 +98,13 @@ class ProfileActivity : AppCompatActivity() {
             fullName = binding.edtFullName.text.toString()
             username = binding.edtUsername.text.toString()
             phoneNumber = binding.edtPhone.text.toString()
-
-            user = User(user._id, fullName,username, user.email,user.password,user.address?:"", gender, user.role, phoneNumber, user.avatar?:"", birthday, user.token)
+            user = User(user._id, fullName,username, user.email,user.password,user.address, gender, user.role, phoneNumber, user.avatar, birthday, user.token)
             Log.d("Update", user.toString())
-
             updateProfile(user._id, user)
-
         }
 
         binding.btnCancel.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
 
@@ -126,7 +114,7 @@ class ProfileActivity : AppCompatActivity() {
         ApiServiceUser.apiServiceUser.updateProfile(id, "Bearer ${Constant.token}", user).enqueue(object: Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 Toast.makeText(this@ProfileActivity,"update profile success", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {

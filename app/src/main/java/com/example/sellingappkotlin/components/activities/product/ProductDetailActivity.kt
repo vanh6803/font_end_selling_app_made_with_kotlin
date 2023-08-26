@@ -18,10 +18,8 @@ import com.example.sellingappkotlin.databinding.BottomSheetDialogBuyNowBinding
 import com.example.sellingappkotlin.databinding.DialogShowMoreProductBinding
 import com.example.sellingappkotlin.models.responseApi.ApiResponseProductDetail
 import com.example.sellingappkotlin.models.Product
-import com.example.sellingappkotlin.models.ProductToBill
 import com.example.sellingappkotlin.utils.ApiServiceProduct
 import com.example.sellingappkotlin.utils.Config
-import com.example.sellingappkotlin.utils.Constant
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,9 +74,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.tvNameProduct.text = product?.name
-        val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
-        val formattedPrice = numberFormat.format(product?.price)
-        binding.tvPriceProduct.text = "$formattedPrice đ"
+        binding.tvPriceProduct.text = product?.price?.let { formatPrice(it) }
 
         var index: Int
         slideShowAdapter = SlideShowAdapter(this)
@@ -175,16 +171,20 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun showBottomDialog(value:String, OnclickListener: ()->Unit) {
         val binding: BottomSheetDialogBuyNowBinding =
             BottomSheetDialogBuyNowBinding.inflate(LayoutInflater.from(this))
-        var bottomDialog = BottomSheetDialog(this)
+        val bottomDialog = BottomSheetDialog(this)
         bottomDialog.setContentView(binding.root)
         bottomDialog.window?.setBackgroundDrawableResource(R.color.transparent)
 
         colorSelectedAdapter = ColorSelectedAdapter(this)
 
-        /*----------------------------------------------------------------*/
-        //todo: Select a color, and then select the image according to the selected color
         binding.tvName.text = product?.name
         binding.tvQuantity.text = "Total: ${product?.quantity}"
+
+        binding.tvPrice.text = product?.price?.let { formatPrice(it) }
+
+        /*----------------------------------------------------------------*/
+        //todo: Select a color, and then select the image according to the selected color
+
         product?.color?.let { colorSelectedAdapter.setData(it) }
         binding.rcvColor.adapter = colorSelectedAdapter
         var imageSelected = ""
@@ -203,11 +203,14 @@ class ProductDetailActivity : AppCompatActivity() {
 
         /*----------------------------------------------------------------*/
         var index = 1
+        var finalPrice: Int = 0
 
         binding.btnPlus.setOnClickListener {
             index = binding.edQuantity.text.toString().trim().toInt()
             if (index < product?.quantity!!) {
                 index++
+                finalPrice = product?.price!! * index
+                binding.tvPrice.setText(formatPrice(finalPrice))
             } else {
                 Toast.makeText(this, "Number of existing products: ${product?.quantity}", Toast.LENGTH_SHORT).show()
             }
@@ -218,6 +221,9 @@ class ProductDetailActivity : AppCompatActivity() {
             index = binding.edQuantity.text.toString().trim().toInt()
             if (index > 1) {
                 index--
+                finalPrice = product?.price!! * index
+                Log.d("finalPrice",  finalPrice.toString())
+                binding.tvPrice.setText(formatPrice(finalPrice))
             } else {
                 Toast.makeText(this, "Can't select numbers less than 1", Toast.LENGTH_SHORT).show()
             }
@@ -225,10 +231,12 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
 
+
+
         binding.btnBuyNow.setText(value)
         binding.btnBuyNow.setOnClickListener {
-            var obj = ProductToBill("",Constant.uid ,product?.name!!, product?.price!!, colorSelectedAdapter.itemSelected, index, product?.status!!, product?.manufacturer?.name!!, imageSelected)
-            Log.d("OBJECT", obj.toString())
+
+
             OnclickListener.invoke()
         }
 
@@ -240,6 +248,12 @@ class ProductDetailActivity : AppCompatActivity() {
             callApi()
             binding.swipeRefresh.isRefreshing = false
         }
+    }
+
+    private fun formatPrice(price: Int): String{
+        val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+        var formattedPrice = numberFormat.format(price)
+        return formattedPrice
     }
 
 

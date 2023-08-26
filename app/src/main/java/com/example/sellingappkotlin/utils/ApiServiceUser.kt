@@ -49,6 +49,7 @@ interface ApiServiceUser {
     @PUT("account/edit-avatar/{id}")
     fun upLoadAvatar(
         @Path("id") id: String,
+        @Header("Authorization") authToken: String,
         @Part avatar : MultipartBody.Part
     ): Call<Void>
 

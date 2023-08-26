@@ -87,8 +87,8 @@ class HomeFragment : Fragment() {
     private fun initView() {
         getProfile(Constant.token)
         slideImageHotProduct()
-        showProducts()
         showManufactures()
+        showProducts()
         initRefresh()
 
         productAdapter = ProductAdapter(requireContext())
@@ -114,6 +114,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnAll.setOnClickListener { showProducts() }
+
 
 
     }
